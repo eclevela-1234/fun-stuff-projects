@@ -16,21 +16,21 @@ console.log(url);
 
 fetch(url)
   .then(function (response) {
-    console.log(response);
     return response.json();
   })
   .then(function (data) {
-    let offsetAmt = Math.floor(100 * Math.random(data.data.total));
+    for (i = 0; i < 10; i++) {
+      var offsetAmt = Math.floor(data.data.total * Math.random());
 
-    let newUrl = url + "&offset=" + offsetAmt;
-    fetch(newUrl)
-      .then(function (response) {
-        console.log(response);
-        return response.json();
-      })
-      .then(function (data) {
-        console.log("Offset Data", data);
-      });
+      var newUrl = url + "&offset=" + offsetAmt;
+      fetch(newUrl)
+        .then(function (response) {
+          return response.json();
+        })
+        .then(function (data) {
+          console.log(data.data.results[0].name);
+        });
+    }
   });
 
 bodyEl = $("body");
